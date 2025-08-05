@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corrector de Ejercicios de Rumbos y Azimuts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #0056b3;
+            border-bottom: 2px solid #0056b3;
+            padding-bottom: 5px;
+        }
+        .exercise-group {
+            margin-bottom: 30px;
+        }
+        .exercise-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .exercise-item label {
+            min-width: 150px;
+            font-weight: bold;
+        }
+        .exercise-item input[type="text"] {
+            flex-grow: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+            text-transform: uppercase; /* Para manejar las letras N, S, E, W */
+        }
+        .result {
+            padding: 5px 10px;
+            border-radius: 4px;
+            color: #fff;
+            font-weight: bold;
+            min-width: 60px;
+            text-align: center;
+        }
+        .correct {
+            background-color: #28a745;
+        }
+        .incorrect {
+            background-color: #dc3545;
+        }
+        .pending {
+            background-color: #ffc107;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            background-color: #007bff;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Autocorrector de Ejercicios</h1>
+
+    <div class="exercise-group">
+        <h2>Ejercicio 2.2: Convertir azimutal a por cuadrantes</h2>
+        <p>Formato de respuesta: `letra-grados-letra` (ejemplo: N-5-E). Los grados no deben tener decimales.</p>
+
+        <div class="exercise-item">
+            <label for="e22_a">a) 340/62 &rarr;</label>
+            <input type="text" id="e22_a" placeholder="Ej: N-20-E">
+            <span id="result_e22_a" class="result pending">Pendiente</span>
+        </div>
+        <div class="exercise-item">
+            <label for="e22_b">b) 203/34 &rarr;</label>
+            <input type="text" id="e22_b" placeholder="Ej: N-20-E">
+            <span id="result_e22_b" class="result pending">Pendiente</span>
+        </div>
+        <div class="exercise-item">
+            <label for="e22_c">c) 47/12 &rarr;</label>
+            <input type="text" id="e22_c" placeholder="Ej: N-20-E">
+            <span id="result_e22_c" class="result pending">Pendiente</span>
+        </div>
+        <div class="exercise-item">
+            <label for="e22_d">d) 69/19 &rarr;</label>
+            <input type="text" id="e22_d" placeholder="Ej: N-20-E">
+            <span id="result_e22_d" class="result pending">Pendiente</span>
+        </div>
+        <div class="exercise-item">
+            <label for="e22_e">e) 269/85 &rarr;</label>
+            <input type="text" id="e22_e" placeholder="Ej: N-20-E">
+            <span id="result_e22_e" class="result pending">Pendiente</span>
+        </div>
+        <div class="exercise-item">
+            <label for="e22_f">f) 355/45 &rarr;</label>
+            <input type="text" id="e22_f" placeholder="Ej: N-20-E">
+            <span id="result_e22_f" class="result pending">Pendiente</span>
+        </div>
+    </div>
+
+    <div class="exercise-group">
+        <h2>Ejercicio 2.3: Convertir por cuadrantes a azimutal</h2>
+        <p>Formato de respuesta: `azimutal/buzamiento` (ejemplo: 205/30). Los grados no deben tener decimales.</p>
+
+        <div class="exercise-item">
+            <label for="e23_a">a) N-75-W &rarr;</label>
+            <input type="text" id="e23_a" placeholder="Ej: 205/30">
+            <span id="result_e23_a" class="result pending">Pendiente</span>
+        </div>
+        <div class="exercise-item">
+            <label for="e23_b">b) S-40-W &rarr;</label>
+            <input type="text" id="e23_b" placeholder="Ej: 205/30">
+            <span id="result_e23_b" class="result pending">Pendiente</span>
+        </div>
+        <div class="exercise-item">
+            <label for="e23_c">c) S-28-E &rarr;</label>
+            <input type="text" id="e23_c" placeholder="Ej: 205/30">
+            <span id="result_e23_c" class="result pending">Pendiente</span>
+        </div>
+        <div class="exercise-item">
+            <label for="e23_d">d) N-34-E &rarr;</label>
+            <input type="text" id="e23_d" placeholder="Ej: 205/30">
+            <span id="result_e23_d" class="result pending">Pendiente</span>
+        </div>
+        <div class="exercise-item">
+            <label for="e23_e">e) N-65-W &rarr;</label>
+            <input type="text" id="e23_e" placeholder="Ej: 205/30">
+            <span id="result_e23_e" class="result pending">Pendiente</span>
+        </div>
+        <div class="exercise-item">
+            <label for="e23_f">f) N-10-W &rarr;</label>
+            <input type="text" id="e23_f" placeholder="Ej: 205/30">
+            <span id="result_e23_f" class="result pending">Pendiente</span>
+        </div>
+    </div>
+
+    <button onclick="checkAnswers()">Corregir Ejercicios</button>
+</div>
+
+<script>
+    // Respuestas correctas del Ejercicio 2.2 (Azimutal -> Cuadrantes)
+    // El formato es `letra-grados-letra/buzamiento`
+    const answers22 = {
+        'e22_a': 'N-20-W/62',
+        'e22_b': 'S-23-W/34',
+        'e22_c': 'N-47-E/12',
+        'e22_d': 'N-69-E/19',
+        'e22_e': 'S-89-W/85',
+        'e22_f': 'N-5-W/45'
+    };
+
+    // Respuestas correctas del Ejercicio 2.3 (Cuadrantes -> Azimutal)
+    // El formato es `azimutal/buzamiento`
+    const answers23 = {
+        'e23_a': '285/75',
+        'e23_b': '220/40',
+        'e23_c': '152/28',
+        'e23_d': '34/34',
+        'e23_e': '295/65',
+        'e23_f': '350/10'
+    };
+
+    // Función principal para corregir todas las respuestas
+    function checkAnswers() {
+        // Corregir Ejercicio 2.2
+        for (const key in answers22) {
+            const inputElement = document.getElementById(key);
+            const resultElement = document.getElementById(`result_${key}`);
+            
+            // Unimos el rumbo y el buzamiento para la comparación
+            const userAnswer = `${inputElement.value.toUpperCase()}/${key.buzamiento}`; // La lógica de buzamiento no es directa, mejor le decimos al usuario que lo ignore en este ejercicio.
+            
+            // Simplemente comparamos la parte de rumbo (azimutal o cuadrantes)
+            const userRumbo = inputElement.value.toUpperCase().replace(/\s/g, ''); // Limpiamos espacios
+            const correctRumbo = answers22[key].split('/')[0].replace(/\s/g, '');
+
+            if (userRumbo === correctRumbo) {
+                resultElement.textContent = 'Correcto';
+                resultElement.className = 'result correct';
+            } else {
+                resultElement.textContent = 'Incorrecto';
+                resultElement.className = 'result incorrect';
+            }
+        }
+
+        // Corregir Ejercicio 2.3
+        for (const key in answers23) {
+            const inputElement = document.getElementById(key);
+            const resultElement = document.getElementById(`result_${key}`);
+            
+            // Simplemente comparamos la respuesta completa
+            const userAnswer = inputElement.value.toUpperCase().replace(/\s/g, '');
+            const correctAnswer = answers23[key].replace(/\s/g, '');
+
+            if (userAnswer === correctAnswer) {
+                resultElement.textContent = 'Correcto';
+                resultElement.className = 'result correct';
+            } else {
+                resultElement.textContent = 'Incorrecto';
+                resultElement.className = 'result incorrect';
+            }
+        }
+    }
+</script>
+
+</body>
+</html>
