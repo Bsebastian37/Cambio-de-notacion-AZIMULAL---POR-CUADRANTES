@@ -1,225 +1,136 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conversor de Notación Geológica</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            padding: 20px;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-        .container {
-            max-width: 800px;
-            margin: auto;
-            background: #fff;
-            padding: 20px 30px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h1, h2 {
-            color: #0056b3;
-            border-bottom: 2px solid #0056b3;
-            padding-bottom: 5px;
-        }
-        .converter-group {
-            margin-bottom: 30px;
-            border: 1px solid #ddd;
-            padding: 20px;
-            border-radius: 8px;
-            background-color: #f9f9f9;
-        }
-        .input-group {
-            margin-bottom: 15px;
-        }
-        .input-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        .input-group input[type="text"] {
-            width: calc(100% - 16px);
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        .result-box {
-            background-color: #e9ecef;
-            padding: 10px;
-            border-radius: 4px;
-            border: 1px solid #dee2e6;
-            min-height: 20px;
-            font-size: 1.1em;
-            font-weight: bold;
-            color: #495057;
-            text-align: center;
-        }
-        .error-message {
-            color: #dc3545;
-            font-weight: bold;
-            display: none;
-            margin-top: 5px;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de Notación Geológica</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #0056b3;
+            border-bottom: 2px solid #0056b3;
+            padding-bottom: 5px;
+        }
+        .converter-group {
+            margin-bottom: 30px;
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .input-group input[type="text"] {
+            width: calc(100% - 16px);
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .result-box {
+            background-color: #e9ecef;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #dee2e6;
+            min-height: 20px;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #495057;
+            text-align: center;
+        }
+        .error-message {
+            color: #dc3545;
+            font-weight: bold;
+            display: none;
+            margin-top: 5px;
+        }
+    </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Conversor de Notación Geológica</h1>
-    <p>Introduce los datos en el formato correcto y el conversor mostrará el resultado automáticamente.</p>
+    <h1>Conversor de Notación Geológica</h1>
+    <p>Introduce los datos en el formato correcto y el conversor mostrará el resultado automáticamente.</p>
 
-    <div class="converter-group">
-        <h2>Conversor 1: Azimutal a Por Cuadrantes</h2>
-        <p>Formato de entrada: <code>Azimutal/Buzamiento</code> (ejemplo: <code>205/30</code>). Los grados deben ser números.</p>
-        
-        <div class="input-group">
-            <label for="azimuthalInput">Datos Azimutales:</label>
-            <input type="text" id="azimuthalInput" placeholder="Ej: 205/30" oninput="convertAzimuthalToQuadrant()">
-        </div>
-        
-        <div class="input-group">
-            <label>Resultado (Cuadrantes):</label>
-            <div id="quadrantResult" class="result-box">Esperando datos...</div>
-        </div>
-        <div id="azimuthalError" class="error-message"></div>
-    </div>
+    <div class="converter-group">
+        <h2>Conversor 1: Azimutal a Por Cuadrantes</h2>
+        <p>Formato de entrada: <code>Dirección de Inclinación/Buzamiento</code> (ejemplo: <code>050/20</code>). Los grados deben ser números.</p>
+        
+        <div class="input-group">
+            <label for="azimuthalInput">Datos Azimutales:</label>
+            <input type="text" id="azimuthalInput" placeholder="Ej: 050/20" oninput="convertAzimuthalToQuadrant()">
+        </div>
+        
+        <div class="input-group">
+            <label>Resultado (Cuadrantes):</label>
+            <div id="quadrantResult" class="result-box">Esperando datos...</div>
+        </div>
+        <div id="azimuthalError" class="error-message"></div>
+    </div>
 
-    <div class="converter-group">
-        <h2>Conversor 2: Por Cuadrantes a Azimutal</h2>
-        <p>Formato de entrada: <code>N-grados-E/buzamiento</code> (ejemplo: <code>S-40-W/30</code>). Los grados deben ser números. Direcciones válidas: N, S, E, W.</p>
-        
-        <div class="input-group">
-            <label for="quadrantInput">Datos Por Cuadrantes:</label>
-            <input type="text" id="quadrantInput" placeholder="Ej: S-40-W/30" oninput="convertQuadrantToAzimuthal()">
-        </div>
-        
-        <div class="input-group">
-            <label>Resultado (Azimutal):</label>
-            <div id="azimuthalResult" class="result-box">Esperando datos...</div>
-        </div>
-        <div id="quadrantError" class="error-message"></div>
-    </div>
+    <div class="converter-group">
+        <h2>Conversor 2: Por Cuadrantes a Azimutal</h2>
+        <p>Formato de entrada: <code>Rumbo/Buzamiento-Dirección de Inclinación</code> (ejemplo: <code>N40O-20E</code>). Direcciones válidas: N, S, E, O, W.</p>
+        
+        <div class="input-group">
+            <label for="quadrantInput">Datos Por Cuadrantes:</label>
+            <input type="text" id="quadrantInput" placeholder="Ej: N40O-20E" oninput="convertQuadrantToAzimuthal()">
+        </div>
+        
+        <div class="input-group">
+            <label>Resultado (Azimutal):</label>
+            <div id="azimuthalResult" class="result-box">Esperando datos...</div>
+        </div>
+        <div id="quadrantError" class="error-message"></div>
+    </div>
 </div>
 
 <script>
-    // Función para convertir de Azimutal a Por Cuadrantes
-    function convertAzimuthalToQuadrant() {
-        const input = document.getElementById('azimuthalInput').value.trim();
-        const resultBox = document.getElementById('quadrantResult');
-        const errorBox = document.getElementById('azimuthalError');
-        
-        errorBox.style.display = 'none';
+    // Función para convertir de Azimutal a Por Cuadrantes
+    // Esta función ahora considera que el input azimutal es el buzamiento.
+    function convertAzimuthalToQuadrant() {
+        const input = document.getElementById('azimuthalInput').value.trim();
+        const resultBox = document.getElementById('quadrantResult');
+        const errorBox = document.getElementById('azimuthalError');
+        
+        errorBox.style.display = 'none';
 
-        if (!input) {
-            resultBox.textContent = 'Esperando datos...';
-            return;
-        }
+        if (!input) {
+            resultBox.textContent = 'Esperando datos...';
+            return;
+        }
 
-        const parts = input.split('/');
-        if (parts.length !== 2) {
-            errorBox.textContent = 'Formato incorrecto. Use Azimutal/Buzamiento.';
-            errorBox.style.display = 'block';
-            resultBox.textContent = '';
-            return;
-        }
+        const parts = input.split('/');
+        if (parts.length !== 2) {
+            errorBox.textContent = 'Formato incorrecto. Use Dirección de Inclinación/Buzamiento.';
+            errorBox.style.display = 'block';
+            resultBox.textContent = '';
+            return;
+        }
 
-        const azimuth = parseFloat(parts[0]);
-        const dip = parseFloat(parts[1]);
+        const dipDirection = parseFloat(parts[0]);
+        const dip = parseFloat(parts[1]);
 
-        if (isNaN(azimuth) || isNaN(dip) || azimuth < 0 || azimuth > 360 || dip < 0 || dip > 90) {
-            errorBox.textContent = 'Valores inválidos. Asegúrese de que los grados sean números y estén en los rangos correctos (0-360 para Azimutal, 0-90 para Buzamiento).';
-            errorBox.style.display = 'block';
-            resultBox.textContent = '';
-            return;
-        }
-
-        let quadrant, angle;
-
-        if (azimuth >= 0 && azimuth < 90) {
-            quadrant = 'N-E';
-            angle = azimuth;
-        } else if (azimuth >= 90 && azimuth < 180) {
-            quadrant = 'S-E';
-            angle = 180 - azimuth;
-        } else if (azimuth >= 180 && azimuth < 270) {
-            quadrant = 'S-W';
-            angle = azimuth - 180;
-        } else {
-            quadrant = 'N-W';
-            angle = 360 - azimuth;
-        }
-
-        resultBox.textContent = `${quadrant.split('-')[0]}-${Math.round(angle)}-${quadrant.split('-')[1]}/${Math.round(dip)}`;
-    }
-
-    // Función para convertir de Por Cuadrantes a Azimutal
-    function convertQuadrantToAzimuthal() {
-        const input = document.getElementById('quadrantInput').value.trim().toUpperCase();
-        const resultBox = document.getElementById('azimuthalResult');
-        const errorBox = document.getElementById('quadrantError');
-        
-        errorBox.style.display = 'none';
-
-        if (!input) {
-            resultBox.textContent = 'Esperando datos...';
-            return;
-        }
-
-        const parts = input.split('/');
-        if (parts.length !== 2) {
-            errorBox.textContent = 'Formato incorrecto. Use N-grados-E/buzamiento.';
-            errorBox.style.display = 'block';
-            resultBox.textContent = '';
-            return;
-        }
-        
-        const rumboStr = parts[0].split('-');
-        const dip = parseFloat(parts[1]);
-        
-        if (rumboStr.length !== 3) {
-             errorBox.textContent = 'Formato de rumbo incorrecto. Use N-grados-E.';
-            errorBox.style.display = 'block';
-            resultBox.textContent = '';
-            return;
-        }
-        
-        const direction1 = rumboStr[0];
-        const angle = parseFloat(rumboStr[1]);
-        const direction2 = rumboStr[2];
-
-        if (isNaN(angle) || isNaN(dip) || angle < 0 || angle > 90 || dip < 0 || dip > 90) {
-            errorBox.textContent = 'Valores inválidos. Asegúrese de que los grados sean números y estén en los rangos correctos (0-90).';
-            errorBox.style.display = 'block';
-            resultBox.textContent = '';
-            return;
-        }
-        
-        if (!['N', 'S'].includes(direction1) || !['E', 'W'].includes(direction2)) {
-             errorBox.textContent = 'Direcciones inválidas. Use N, S, E o W.';
-            errorBox.style.display = 'block';
-            resultBox.textContent = '';
-            return;
-        }
-
-        let azimuth;
-
-        if (direction1 === 'N' && direction2 === 'E') {
-            azimuth = angle;
-        } else if (direction1 === 'S' && direction2 === 'E') {
-            azimuth = 180 - angle;
-        } else if (direction1 === 'S' && direction2 === 'W') {
-            azimuth = 180 + angle;
-        } else { // N-W
-            azimuth = 360 - angle;
-        }
-        
-        resultBox.textContent = `${Math.round(azimuth)}/${Math.round(dip)}`;
-    }
-</script>
-
-</body>
-</html>
+        if (isNaN(dipDirection) || isNaN(dip) || dipDirection < 0 || dipDirection > 360 || dip < 0 || dip > 90) {
+            errorBox.textContent = 'Valores inválidos. Asegúrese de que los grados sean números y estén en los rangos correctos (0-360 para Dirección, 0-90 para Buzamiento).';
+            errorBox.style.display = 'block';
